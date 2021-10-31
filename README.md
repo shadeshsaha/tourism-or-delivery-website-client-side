@@ -1,11 +1,11 @@
-# Coding Club Institute
+# Ageless Holidays Tourism Guide
 
-You can visit now, [Live Site link](https://hasan-assignment-9.netlify.app).
+You can visit now, [Live Site link](https://ageless-holidays.web.app/).
 
-## Technology I used to build this project:
+## In this travel and tourism project:
 
-- Html
-- jsx
-- js
-- react
-- css
+    -> Explore tourist places <br>
+    -> Know about that places in a nutshell
+    -> They can book packges by seeing the price
+    -> They can know about this tourism guides
+    -> Contact with us if they need to know anything
