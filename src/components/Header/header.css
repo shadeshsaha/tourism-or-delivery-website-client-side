@@ -1,13 +1,5 @@
-@media screen and (max-width: 405px) {
-  .navBarBrand span {
-    display: none !important;
+@media screen and (max-width: 400px) {
+  .title {
+    display: none;
   }
-  .navBarBrand img {
-    width: 80px;
-  }
-}
-
-.hoverStyle:hover {
-  color: #000 !important;
-  transition: 0.3s;
 }

@@ -1,9 +1,9 @@
 import React from "react";
 import { Container, Row } from "react-bootstrap";
-import Zoom from "react-reveal/Zoom";
+import Bounce from "react-reveal/Bounce";
 import useCourses from "../../hooks/useCourses.js";
 import Course from "../course/Course.js";
-import bgImage from "./../../assets/images/destinationbg.jpg";
+import bgImage from "./../../assets/images/sectionBg.png";
 
 const Courses = () => {
   const [courses] = useCourses();
@@ -12,17 +12,18 @@ const Courses = () => {
       style={{ background: `url(${bgImage})`, backgroundAttachment: "fixed" }}
     >
       <Container className="py-5">
-        <Zoom right cascade>
-          <h2 className="text-center text-black fw-bold mb-0">Our All Tour Packages</h2>
-        </Zoom>
-        <Zoom left cascade>
-          <p className="my-4 mt-2 text-center text-white fs-5">
-            "Welcome to Ageless Holidays. Here you can find your favourite tour places easily. You can see the ratings, prices and everything regarding your tour places"
+        <Bounce left cascade>
+          <h2 className="text-center text-white mb-0">Our All Courses</h2>
+        </Bounce>
+        <Bounce right cascade>
+          <p className="my-4 mt-2 text-center text-muted fs-5">
+            Learn exciting technologies from web development, design, game
+            development and more!
           </p>
-        </Zoom>
+        </Bounce>
         <Row>
           {courses?.map((course) => (
-            <Course course={course} key={course.key}></Course>
+            <Course course={course} id={course.id}></Course>
           ))}
         </Row>
       </Container>

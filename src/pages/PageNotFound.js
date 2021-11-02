@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import SectionBg from "./../../assets/images/sectionBg.png";
+import SectionBg from "./../assets/images/sectionBg.png";
 const NotFound = () => {
   return (
     <div

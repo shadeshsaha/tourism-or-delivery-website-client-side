@@ -52,14 +52,14 @@ const Cart = () => {
                           </Col>
                           <Col className="d-flex align-items-center">
                             <NavLink
-                              to={`/courses/${course.key}`}
+                              to={`/courses/${course.id}`}
                               className="w-50 btn py-2 btn-primary"
                             >
                               View Details
                             </NavLink>
                             <button
                               onClick={() => {
-                                removeItem(course.key);
+                                removeItem(course.id);
                               }}
                               className="btn py-2 ms-1 w-50 btn-primary"
                             >
@@ -79,7 +79,7 @@ const Cart = () => {
               md={4}
             >
               <div className="text-center my-2">
-                <h3>Total {selectedCourse.length} Package Selected</h3>
+                <h3>Total {selectedCourse.length} Food Selected</h3>
                 <h4>Cost: {totalCost}$</h4>
                 <button
                   onClick={() => {
@@ -95,7 +95,7 @@ const Cart = () => {
           </Row>
         </Container>
       ) : (
-        <h1 className="text-center my-5 py-5">No Package Selected</h1>
+        <h1 className="text-center my-5 py-5">No food Selected</h1>
       )}
     </div>
   );

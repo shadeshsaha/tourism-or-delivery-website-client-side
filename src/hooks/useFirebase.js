@@ -1,164 +1,152 @@
-import { useEffect, useState } from "react";
-import firebaseInitialize from "../firebase/firebase.init.js";
 import {
-  GoogleAuthProvider,
-  FacebookAuthProvider,
-  GithubAuthProvider,
+  createUserWithEmailAndPassword,
   getAuth,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  sendEmailVerification,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
-  onAuthStateChanged,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
   updateProfile,
-  sendEmailVerification,
 } from "firebase/auth";
-firebaseInitialize();
+import { useEffect, useState } from "react";
+import firebaseInitialization from "./../firebase/firebase.init.js";
+firebaseInitialization();
 
+// Providers
 const googleProvider = new GoogleAuthProvider();
-const fbProvider = new FacebookAuthProvider();
-const gitHubProvider = new GithubAuthProvider();
+
 const auth = getAuth();
 
 const useFirebase = () => {
   const [user, setUser] = useState({});
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const [photoURL, setPhotoURL] = useState("");
-
-  const ClearError = () => {
-    setTimeout(() => {
-      setError("");
-    }, 5000);
-  };
+  const [photo, setPhoto] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(true);
 
   // clear error
   useEffect(() => {
-    ClearError();
+    setTimeout(() => {
+      setError("");
+    }, 5000);
   }, [error]);
 
-  //google sign in
-  const signInWithGoogle = () => {
+  // google sign in
+  function signInWithGoogle() {
     return signInWithPopup(auth, googleProvider);
-  };
+  }
 
-  //facebook sign in
-  const signInWithFacebook = () => {
-    signInWithPopup(auth, fbProvider)
-      .then((result) => {
-        const user = result.user;
-        setUser(user);
-      })
-      .catch((err) => {
-        const errorMessage = err.message;
-        setError(errorMessage);
-      });
-  };
-
-  //github sign in
-  const signInWithGithub = () => {
-    signInWithPopup(auth, gitHubProvider)
-      .then((result) => {
-        const user = result.user;
-        setUser(user);
-      })
-      .catch((err) => {
-        const errorMessage = err.message;
-        setError(errorMessage);
-      });
-  };
-
-  //signInWithEmailAndPassword
-  const signInWithEmail = (e) => {
+  // Email sign in
+  function signInWithEmail(e) {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((res) => {
-        setUser(res.user);
-      })
-      .catch((err) => setError(err.message));
-  };
+    return signInWithEmailAndPassword(auth, email, password);
+  }
+  // set name and profile image url
+  function setNameAndImage() {
+    updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photo,
+    })
+      .then(() => {})
+      .catch((error) => {
+        setError(error.message);
+      });
+  }
+
+  function emailVerify() {
+    sendEmailVerification(auth.currentUser).then(() => {
+      alert(`An Verification mail has been set to ${email}`);
+    });
+  }
+
+  // Get the currently signed-in user
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (signedInUser) => {
+      if (signedInUser) {
+        setUser(signedInUser);
+      } else {
+        setUser({});
+      }
+      setLoading(false);
+    });
+    return () => unsubscribe;
+  }, []);
 
   // sign out
-  const logOut = () => {
+  function logOut() {
     signOut(auth)
-      .then((result) => {
+      .then((res) => {
         setUser({});
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  }
+
+  // reset password
+  function passwordReset(e) {
+    e.preventDefault();
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        alert("password reset email has been sent");
       })
       .catch((err) => {
         setError(err.message);
       });
-  };
+  }
 
-  // get currently signed in user
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
-        setUser(currentUser);
-      }
-    });
-    return () => unsubscribe;
-  }, [user]);
+  // sign up with email password
+  function singUp(e) {
+    e.preventDefault();
 
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((result) => {
+        setNameAndImage();
+        emailVerify();
+        alert("user has been created");
+      })
+      .catch((err) => {
+        setError(err.message);
+      });
+  }
   // get name
-  const getName = (e) => {
+  function getName(e) {
     setName(e?.target?.value);
-  };
-  // get email
-  const getEmail = (e) => {
+  }
+
+  // get Email
+  function getEmail(e) {
     setEmail(e?.target?.value);
-  };
-  // get password
-  const getPassword = (e) => {
+  }
+  // Get password
+  function getPassword(e) {
     setPassword(e?.target?.value);
-  };
-  // get password
-  const getPhotoURL = (e) => {
-    setPhotoURL(e?.target?.value);
-  };
-
-  // signUp
-  const signUpWithEmail = () => {
-    return createUserWithEmailAndPassword(auth, email, password);
-  };
-
-  // update name and email
-  const setUserName = () => {
-    updateProfile(auth.currentUser, {
-      displayName: name,
-      photoURL: photoURL,
-    }).then((result) => {});
-  };
-
-  // sendVilifiedEmail
-  function sendVilifiedEmail() {
-    sendEmailVerification(auth.currentUser).then((result) => {
-      alert(
-        `Please verify your email, a verification email has been sent to ${email}`
-      );
-    });
+  }
+  // Get photoUrl
+  function getPhoto(e) {
+    setPhoto(e?.target?.value);
   }
 
   return {
-    sendVilifiedEmail,
-    setUserName,
-    sendEmailVerification,
+    signInWithEmail,
+
+    logOut,
     signInWithGoogle,
-    signInWithFacebook,
-    signInWithGithub,
     user,
     setUser,
     error,
-    auth,
     setError,
-    logOut,
-    getEmail,
     getPassword,
-    signUpWithEmail,
-    signInWithEmail,
+    getEmail,
+    singUp,
+    getPhoto,
     getName,
-    getPhotoURL,
+    passwordReset,
+    loading,
   };
 };
 

@@ -1,121 +1,84 @@
 import React from "react";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 import useAuth from "../../hooks/useAuth.js";
-import HeaderBg from "./../../assets/images/header-bg.png";
-import logo from "./../../logo.png";
+import HeaderBG from "./../../assets/images/header-bg.jpg";
+import logo from "./../../assets/images/logo.png";
 import "./header.css";
 
 const Header = () => {
-  const { contexts, selectedCourse } = useAuth();
-  const { user, logOut } = contexts;
-  const active = {
-    color: "#ff136f",
-    borderBottom: "2px solid #ff136f",
-  };
-  const navStyle = {
-    textDecoration: "none",
-    margin: "0 8px",
-    color: "white",
-    fontSize: "17px",
-    fontWeight: "bold",
-    textTransform: "Uppercase",
-  };
+  const { AllContexts } = useAuth();
+  const { user, logOut } = AllContexts;
+  const { displayName, photoURL, email } = user;
   return (
-    <div className="sticky-top">
+    <div className="mb-4">
       <Navbar
-        style={{ background: `url(${HeaderBg})`, backgroundRepeat: "repeat" }}
+        fixed="top"
+        style={{ background: `url(${HeaderBG})` }}
         expand="lg"
       >
         <Container>
-          <NavLink
-            className="hoverStyle text-decoration-none sm-mb-3"
-            to="home"
-          >
-            <Navbar.Brand className="navBarBrand">
-              <img width="80px" src={logo} alt="" />{" "}
-              <span className="fw-bold text-white">Ageless Holidays</span>
-            </Navbar.Brand>
-          </NavLink>
+          <Navbar.Brand as={NavLink} className="text-black" to="/home">
+            <img width="150px" src={logo} alt="Logo" />
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ms-auto align-items-center">
-              <NavLink
-                className="hoverStyle"
-                style={navStyle}
-                activeStyle={active}
-                to="/home"
-              >
+            <Nav className="ms-auto align-items-center text-black fw-bold">
+              <Nav.Link as={NavLink} to="/home">
                 Home
-              </NavLink>
-              <NavLink
-                className="hoverStyle"
-                style={navStyle}
-                activeStyle={active}
-                to="/about"
-              >
+              </Nav.Link>
+
+              <Nav.Link as={NavLink} to="/services">
+                Services
+              </Nav.Link>
+              <Nav.Link as={HashLink} to="/home#feature">
+                More Services
+              </Nav.Link>
+              <Nav.Link as={NavLink} to="/about">
                 About
-              </NavLink>
-              <NavLink
-                className="hoverStyle"
-                style={navStyle}
-                activeStyle={active}
-                to="/courses"
-              >
-                {/* Courses */}
-                Destination
-              </NavLink>
-              <NavLink
-                className="hoverStyle"
-                style={navStyle}
-                activeStyle={active}
-                to="/contact"
-              >
+              </Nav.Link>
+
+              <Nav.Link as={NavLink} to="/contact">
                 Contact
-              </NavLink>
-             
-              {user.displayName ? (
-                <div>
+              </Nav.Link>
+
+              {!displayName ? (
+                <>
+                  <Nav.Link as={NavLink} to="/signup">
+                    Sign Up
+                  </Nav.Link>
+
+                  <Nav.Link as={NavLink} to="/login">
+                    Log in
+                  </Nav.Link>
+                </>
+              ) : (
+                <>
+                  <Nav.Link as={HashLink} to="/dashboard">
+                    Dashboard
+                  </Nav.Link>
+
                   <NavDropdown
                     title={
-                      <>
-                        <img
-                          style={{ width: "45px", borderRadius: "50%" }}
-                          src={user.photoURL}
-                          alt="profile"
-                        />
-                      </>
+                      <img
+                        style={{
+                          width: "45px",
+                          borderRadius: "50%",
+                        }}
+                        src={photoURL}
+                        alt=""
+                      />
                     }
                   >
                     <div className="text-center">
-                      <p>{user.displayName}</p>
-                      <p>{user.email}</p>
-                      <div className="text-center">
-                        <button onClick={logOut} className="btn btn-primary">
-                          Log Out
-                        </button>
-                      </div>
+                      <h6>{displayName}</h6>
+                      <p className="m-0 mb-2">{email}</p>
+                      <button onClick={logOut} className="btn btn-danger">
+                        Sign Out
+                      </button>
                     </div>
                   </NavDropdown>
-                </div>
-              ) : (
-                <>
-                  <NavLink
-                    className="hoverStyle"
-                    style={navStyle}
-                    activeStyle={active}
-                    to="/login"
-                  >
-                    Login
-                  </NavLink>
-                  <NavLink
-                    className="hoverStyle"
-                    style={navStyle}
-                    activeStyle={active}
-                    to="/signup"
-                  >
-                    Sign up
-                  </NavLink>
                 </>
               )}
             </Nav>

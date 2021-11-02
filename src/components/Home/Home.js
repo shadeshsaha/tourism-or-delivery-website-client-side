@@ -21,7 +21,7 @@ const Home = () => {
       <div
         style={{
           background: `url(${Bg})`,
-          backgroundRepeat: "repeat",
+          backgroundRepeat: "no-repeat",
           backgroundPosition: "center center",
           backgroundSize: "cover",
         }}
@@ -33,12 +33,14 @@ const Home = () => {
           >
             <div className="text-center my-5 py-5">
               <Bounce left cascade>
-                <h1 className="text-white mt-5 fw-bold">Explore Beautiful Places In Bangladesh</h1>
+                <h1 className="text-white">The best Food Services</h1>
               </Bounce>
 
               <Bounce right cascade>
                 <p className="my-4 text-white fs-5">
-                Tours | Travel | Guide
+                  Food is any substance consumed to provide nutritional support
+                  for an organism. Food is usually of plant, animal or fungal
+                  origin
                 </p>
               </Bounce>
 
@@ -48,7 +50,7 @@ const Home = () => {
                   className="rounded-pill fs-5 py-2 px-4"
                   variant="primary"
                 >
-                  Explore
+                  View Courses
                 </Button>
               </Bounce>
             </div>
@@ -56,20 +58,20 @@ const Home = () => {
         </Container>
       </div>
       <div
-        style={{ background: `url(${bgImage})`, backgroundAttachment: "fixed", }}
+        style={{ background: `url(${bgImage})`, backgroundAttachment: "fixed" }}
       >
         <Container className="py-5">
           <Slide left>
-            <h2 className="text-center text-dark mb-2">Tour Packages</h2>
+            <h2 className="text-center text-white mb-2">More Items </h2>
           </Slide>
           <Slide right>
-            <p className="text-center text-dark fw-bold">
-            A Great Collection Of Your Tour Packages. Enjoy Your Leisure By Visiting These Places
+            <p className="text-muted text-center">
+              Here you can find our all latest Foods Items. Choose your items..
             </p>
           </Slide>
           <Row>
             {featureCourses?.map((course) => (
-              <Course course={course} key={course.key}></Course>
+              <Course course={course} id={course.id}></Course>
             ))}
           </Row>
         </Container>

@@ -1,53 +1,28 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { Col, Form, FormControl, InputGroup, Row } from "react-bootstrap";
+import useAuth from "../hooks/useAuth.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  Button,
-  Col,
-  Form,
-  FormControl,
-  InputGroup,
-  Row,
-} from "react-bootstrap";
-import { faEnvelope, faUser, faLock } from "@fortawesome/free-solid-svg-icons";
-import { NavLink, useHistory } from "react-router-dom";
-import useAuth from "../../hooks/useAuth.js";
+  faEnvelope,
+  faLock,
+  faUser,
+  faLink,
+} from "@fortawesome/free-solid-svg-icons";
+import { NavLink } from "react-router-dom";
 
-const SignUp = () => {
-  const history = useHistory();
-  const { contexts } = useAuth();
-  const {
-    getEmail,
-    getPassword,
-    signUpWithEmail,
-    getName,
-    getPhotoURL,
-    setError,
-    sendVilifiedEmail,
-    setUserName,
-    error,
-  } = contexts;
+const Signup = () => {
+  const { AllContexts } = useAuth();
+
+  const { getPhoto, getName, singUp, getEmail, getPassword, error } =
+    AllContexts;
+
   return (
     <div className="text-center my-4">
       <h2>Please Sign Up</h2>
       <p className=" mt-2">Sign Up with Email & Password</p>
       <p className="text-danger text-center">{error}</p>
-      <div className="w-25 mx-auto">
-        <Form
-          onSubmit={(e) => {
-            e.preventDefault();
-            signUpWithEmail()
-              .then((result) => {
-                setUserName();
-                sendVilifiedEmail();
-                alert("User has been Created!");
-                history.push("/login");
-              })
-              .catch((err) => {
-                const errorMessage = err.message;
-                setError(errorMessage);
-              });
-          }}
-        >
+      <div style={{ maxWidth: "500px" }} className="w-100 px-3 mx-auto">
+        <Form onSubmit={singUp}>
           <Row>
             <Col className="text-start">
               <Form.Label htmlFor="name" visuallyHidden>
@@ -58,16 +33,16 @@ const SignUp = () => {
                   <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>
                 </InputGroup.Text>
                 <FormControl
+                  required
                   onBlur={getName}
                   type="text"
-                  autoComplete="current-text"
+                  autoComplete="current-name"
                   id="name"
                   placeholder="Enter your name"
                 />
               </InputGroup>
             </Col>
           </Row>
-
           <Row>
             <Col className="text-start">
               <Form.Label htmlFor="email" visuallyHidden>
@@ -78,6 +53,7 @@ const SignUp = () => {
                   <FontAwesomeIcon icon={faEnvelope}></FontAwesomeIcon>
                 </InputGroup.Text>
                 <FormControl
+                  required
                   onBlur={getEmail}
                   type="email"
                   autoComplete="current-email"
@@ -87,7 +63,6 @@ const SignUp = () => {
               </InputGroup>
             </Col>
           </Row>
-
           <Row className="mt-2">
             <Col className="text-start">
               <Form.Label htmlFor="password" visuallyHidden>
@@ -98,6 +73,7 @@ const SignUp = () => {
                   <FontAwesomeIcon icon={faLock}></FontAwesomeIcon>
                 </InputGroup.Text>
                 <FormControl
+                  required
                   onBlur={getPassword}
                   type="password"
                   autoComplete="current-password"
@@ -109,26 +85,27 @@ const SignUp = () => {
           </Row>
           <Row>
             <Col className="text-start">
-              <Form.Label htmlFor="photo" visuallyHidden>
-                Your photo URL
+              <Form.Label htmlFor="name" visuallyHidden>
+                Your Profile photo URL
               </Form.Label>
               <InputGroup className="mb-2">
                 <InputGroup.Text>
-                  <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>
+                  <FontAwesomeIcon icon={faLink}></FontAwesomeIcon>
                 </InputGroup.Text>
                 <FormControl
-                  onBlur={getPhotoURL}
+                  required
+                  onBlur={getPhoto}
                   type="text"
                   autoComplete="current-text"
                   id="photo"
-                  placeholder="Enter your photoURL"
+                  placeholder="Enter valid photo url"
                 />
               </InputGroup>
             </Col>
           </Row>
-          <Button type="submit" className="w-100 mt-3">
-            Sign UP
-          </Button>
+          <button type="submit" className="btn btn-primary mt-2 w-100">
+            Sign up
+          </button>
         </Form>
       </div>
       <p className="mt-2">
@@ -140,4 +117,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Signup;

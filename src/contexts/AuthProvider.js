@@ -1,38 +1,29 @@
-import React, { createContext, useState } from "react";
-import useCourses from "../hooks/useCourses.js";
+import { createContext } from "react";
+import useCart from "../hooks/useCart.js";
 import useFirebase from "../hooks/useFirebase.js";
-export const AuthContext = createContext();
-const AuthProvider = (props) => {
-  const allContext = useFirebase();
-  const [courses] = useCourses();
-  const [selectedCourse, setSelectedCourse] = useState([]);
-  function addToCart(key) {
-    const isHave = selectedCourse.find((course) => course.key === key);
-    if (isHave) {
-      alert("Already Added!");
-    } else {
-      const matchingCourse = courses.find((course) => course.key === key);
-      const newSelectedCourse = [matchingCourse, ...selectedCourse];
-      setSelectedCourse(newSelectedCourse);
-    }
-  }
+import useCourses from "./../hooks/useCourses.js";
 
-  function removeItem(key) {
-    const removed = selectedCourse.filter((course) => course.key !== key);
-    setSelectedCourse(removed);
-  }
+export const AuthContext = createContext();
+
+const AuthProvider = ({ children }) => {
+  // hooks
+  const AllContexts = useFirebase();
+  const { courses, totalPage, currentPage, setCurrentPage } = useCourses();
+  const { addToCart, selectedCourse, remove, setSelectedCourse } = useCart();
 
   const data = {
-    contexts: allContext,
+    currentPage,
+    setCurrentPage,
+    AllContexts,
+    totalPage,
+    courses,
     addToCart,
     selectedCourse,
-    removeItem,
+    remove,
     setSelectedCourse,
   };
 
-  return (
-    <AuthContext.Provider value={data}>{props.children}</AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={data}>{children}</AuthContext.Provider>;
 };
 
 export default AuthProvider;

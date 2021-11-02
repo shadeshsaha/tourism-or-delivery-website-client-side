@@ -1,27 +1,28 @@
-.menuStyle:hover {
-  color: #ff136f !important;
-}
-.social-link a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.footer-link a {
   text-decoration: none;
-  margin: 0 6px;
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  border: 1px solid beige;
-  background-color: white;
+  font-size: 18px;
+  color: black;
+  font-weight: bold;
+  line-height: 35px;
 }
-.social-link a .social-icon {
-  font-size: 22px;
-  transform: translateX(25%);
+.footer-link a:hover {
+  color: rgb(104, 0, 0);
+  transition: 0.06s;
 }
-.youtube {
-  transform: translateX(15%) !important;
-  color: #ff0000;
+
+.gradient {
+  background: rgba(245, 196, 37, 0.788);
+  background: linear-gradient(
+    0deg,
+    rgb(167, 132, 18) 0%,
+    rgb(247, 195, 26) 100%
+  );
 }
-.linkedin {
-  transform: translateX(17%) !important;
-  color: #0e76a8;
+.copyright {
+  background-color: rgb(247, 195, 26);
+}
+
+.dropdown-menu.show {
+  left: -126px;
+  padding: 11px;
 }
