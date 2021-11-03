@@ -7,7 +7,7 @@ const useCourses = () => {
   const size = 9;
   useEffect(() => {
     fetch(
-      `https://pure-shelf-46522.herokuapp.com/services?size=${size}&&page=${currentPage}`
+      `https://powerful-shore-86352.herokuapp.com/services?size=${size}&&page=${currentPage}`
     )
       .then((res) => res.json())
       .then((data) => {

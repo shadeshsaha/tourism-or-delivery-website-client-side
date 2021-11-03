@@ -16,7 +16,7 @@ const Details = () => {
   const { uid } = user;
 
   useEffect(() => {
-    fetch(`https://pure-shelf-46522.herokuapp.com/services/${id}`)
+    fetch(`https://powerful-shore-86352.herokuapp.com/services/${id}`)
       .then((res) => res.json())
       .then((data) => {
         if (data?._id) {

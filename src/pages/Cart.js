@@ -31,7 +31,7 @@ const Cart = () => {
               <button
                 onClick={() => {
                   fetch(
-                    `https://pure-shelf-46522.herokuapp.com/purchase/${uid}`,
+                    `https://powerful-shore-86352.herokuapp.com/purchase/${uid}`,
                     {
                       method: "delete",
                     }

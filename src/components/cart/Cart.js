@@ -79,7 +79,7 @@ const Cart = () => {
               md={4}
             >
               <div className="text-center my-2">
-                <h3>Total {selectedCourse.length} Food Selected</h3>
+                <h3>Total {selectedCourse.length} Course Selected</h3>
                 <h4>Cost: {totalCost}$</h4>
                 <button
                   onClick={() => {
@@ -95,7 +95,7 @@ const Cart = () => {
           </Row>
         </Container>
       ) : (
-        <h1 className="text-center my-5 py-5">No food Selected</h1>
+        <h1 className="text-center my-5 py-5">No Course Selected</h1>
       )}
     </div>
   );

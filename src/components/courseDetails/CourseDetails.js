@@ -58,7 +58,7 @@ const CourseDetails = () => {
                     alt=""
                   />
                   <h4>Seller: {newSelected?.provider}</h4>
-                  <p className="m-0"></p>
+                  <p className="m-0">Web Apps Developer</p>
                 </div>
               </Col>
             </Row>

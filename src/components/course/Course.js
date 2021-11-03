@@ -70,7 +70,7 @@ const Course = ({ course }) => {
                 }}
                 className="btn btn-danger  w-100"
               >
-                Buy Food Now
+                Buy Food
               </button>
             </Card.Body>
           </Card>

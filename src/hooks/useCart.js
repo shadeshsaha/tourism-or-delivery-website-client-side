@@ -7,7 +7,7 @@ const useCart = () => {
   const [selectedCourse, setSelectedCourse] = useState([]);
 
   useEffect(() => {
-    fetch(`https://pure-shelf-46522.herokuapp.com/cart/${uid}`)
+    fetch(`https://powerful-shore-86352.herokuapp.com/cart/${uid}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.length) {
@@ -27,7 +27,7 @@ const useCart = () => {
     if (isHave) {
       alert("course has been selected!");
     } else {
-      fetch("https://pure-shelf-46522.herokuapp.com/course/add", {
+      fetch("https://powerful-shore-86352.herokuapp.com/course/add", {
         method: "post",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(course),
@@ -43,7 +43,7 @@ const useCart = () => {
   }
 
   function remove(id) {
-    fetch(`https://pure-shelf-46522.herokuapp.com/delete/${id}`, {
+    fetch(`https://powerful-shore-86352.herokuapp.com/delete/${id}`, {
       method: "delete",
     })
       .then((res) => res.json())

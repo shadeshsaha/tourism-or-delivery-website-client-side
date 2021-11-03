@@ -1,8 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
-import Footer from "./components/footer/Footer.js";
-import Header from "./components/header/Header.js";
+import Footer from "./components/Footer/Footer.js";
+import Header from "./components/Header/Header.js";
 import AuthProvider from "./contexts/AuthProvider.js";
 import About from "./pages/About.js";
 import Contact from "./pages/Contact.js";

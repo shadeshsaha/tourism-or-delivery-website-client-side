@@ -1,7 +1,7 @@
 import {
   faMailBulk,
   faMapMarkerAlt,
-  faPhone,
+  faPhone
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
@@ -25,16 +25,16 @@ const Footer = () => {
               <ul className="list-unstyled">
                 <li>
                   <FontAwesomeIcon icon={faMapMarkerAlt} />
-                  <span className="ms-1 fs-5"> Demra,Dhaka,Bangladesh</span>
+                  <span className="ms-1 fs-5"> Uttora, Sector-10, Dhaka, Bangladesh</span>
                 </li>
                 <li>
                   <FontAwesomeIcon icon={faMailBulk} />
-                  <span className="ms-1 fs-5">Official: aharbd@ahar.com</span>
+                  <span className="ms-1 fs-5">Official: aaharbd@google.com</span>
                 </li>
                 <li>
                   <FontAwesomeIcon icon={faPhone} />
                   <span className="ms-1 fs-5">
-                    HotLine: 01704404410(Available:10:00AM to 10.00PM)
+                    HotLine: 01544556600(Available:10:00AM to 10.00PM)
                   </span>
                 </li>
               </ul>

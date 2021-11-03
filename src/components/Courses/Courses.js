@@ -17,8 +17,7 @@ const Courses = () => {
         </Bounce>
         <Bounce right cascade>
           <p className="my-4 mt-2 text-center text-muted fs-5">
-            Learn exciting technologies from web development, design, game
-            development and more!
+            Buy authentic foods and get a fast delivery for your desire food.
           </p>
         </Bounce>
         <Row>
