@@ -1,4 +1,4 @@
-# Amar Ahar Food Delivery
+# Ahar Food Delivery
 
 You can visit now, [Live Site link](https://food-delivery-1cfab.web.app/).
 
